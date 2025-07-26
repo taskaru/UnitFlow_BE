@@ -1,0 +1,24 @@
+commit_msg_file="$1"
+commit_msg=$(cat "$commit_msg_file")
+
+branch_name=$(git symbolic-ref --short HEAD)
+
+if [[ $branch_name =~ ^feature\/(DEV[0-9]{4})$ ]]; then
+  ticket="${BASH_REMATCH[1]}"
+  if [[ ! $commit_msg =~ \[$ticket\] ]]; then
+    echo "[ERROR] feature/DEV 브랜치에서는 커밋 메시지에 [${ticket}] 형식을 포함해야 합니다."
+    exit 1
+  fi
+elif [[ $branch_name =~ ^fix_ng_[0-9]+$ ]]; then
+  if [[ ! $commit_msg =~ \[fix_ng_[0-9]+\] ]]; then
+    echo "[ERROR] fix_ng_ 브랜치에서는 커밋 메시지에 [fix_ng_숫자] 형식을 포함해야 합니다."
+    exit 1
+  fi
+elif [[ $branch_name =~ ^refactor_[0-9]+$ ]]; then
+  if [[ ! $commit_msg =~ \[refactor_[0-9]+\] ]]; then
+    echo "[ERROR] refactor_ 브랜치에서는 커밋 메시지에 [refactor_숫자] 형식을 포함해야 합니다."
+    exit 1
+  fi
+else
+  exit 0
+fi
