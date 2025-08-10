@@ -1,24 +1,16 @@
 # .overcommit.yml
 
-# 커밋 직전에 실행되는 훅
 PreCommit:
-  # RuboCop을 통한 Ruby 코드 스타일 검사
   RuboCop:
     enabled: true
-    # 자동 수정 기능을 활성화
     command: ['bundle', 'exec', 'rubocop', '--autocorrect']
-    # 경고가 발생하면 커밋을 실패 처리
     on_warn: fail
 
-# 커밋 메시지 작성 시 실행되는 훅
 CommitMsg:
-  # 커스텀 훅을 사용하기 위해 기본 메시지 형식 검사 비활성화
   MessageFormat:
     enabled: false
 
-  # 커스텀 스크립트를 연결하여 브랜치 규칙을 강제
   CustomBranchMessageFormat:
     enabled: true
     description: '브랜치에 맞는 커밋 메시지 형식을 강제'
-    # 위에서 작성한 스크립트 경로 지정
     required_executable: './.git-hooks/check-commit-msg'
