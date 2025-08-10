@@ -5,11 +5,12 @@ PreCommit:
     on_warn: fail
 
 CommitMsg:
+  # 기본 MessageFormat은 끄고(원하면 두어도 상관없지만 우선 비활성 추천)
+  MessageFormat:
+    enabled: false
+
+  # 커스텀 스크립트 연결
   CustomBranchMessageFormat:
     enabled: true
-    description: '브랜치에 맞는 커밋 메시지 형식을 지켜야 합니다.'
-    exclude_branches:
-      - main
-      - develop
-    required_pattern: '/^\[(DEV\d{4}|fix_ng_\d+|refactor_\d+)\]/'
-    problem_on_unmatch: '커밋 메시지는 [DEV0001], [fix_ng_1234], [refactor_1234] 형식을 따라야 합니다.'
+    description: '브랜치에 맞는 커밋 메시지 형식을 강제'
+    required_executable: './.git-hooks/check-commit-msg'
