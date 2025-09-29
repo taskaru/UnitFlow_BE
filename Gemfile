@@ -47,7 +47,7 @@ group :development, :test do
 end
 
 gem "rubocop", "~> 1.79", groups: [ :development, :test ]
-gem "rubocop-rails", "~> 2.32", groups: [ :development, :test ]
+gem "rubocop-rails", "~> 2.33", groups: [ :development, :test ]
 
 gem "rspec-rails", "~> 8.0", groups: [ :development, :test ]
 
